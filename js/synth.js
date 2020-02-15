@@ -69,8 +69,8 @@ function setup () {
     osc.mod.amp(1)
     osc.mod.start()
     // Hook osc up w/ its mod
-    // osc.wave.amp(0) // This lines enables the mod effect
-    // osc.wave.amp(osc.mod.scale(-1, 1, 1, -1)) // This lines enables the mod effect
+    osc.wave.amp(0) // This lines enables the mod effect
+    osc.wave.amp(osc.mod.scale(-1, 1, 1, -1)) // This lines enables the mod effect
   })
 
   // Modulate the carrier's amplitude with the modulator
