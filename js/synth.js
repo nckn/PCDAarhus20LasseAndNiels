@@ -16,7 +16,7 @@ let remappedDist
 // Classifier Variable
 let classifier
 // Model URL
-let imageModelURL = 'https://teachablemachine.withgoogle.com/models/cktPjbYU/'
+let imageModelURL = 'https://teachablemachine.withgoogle.com/models/gdHHJrrU/'
 let label = ''
 let confidenceThreshold = 0.80
 
@@ -58,7 +58,7 @@ function setup () {
     osc.wave.setType(osc.type)
     osc.wave.start()
     osc.wave.freq(440)
-    // osc.wave.amp(0.5); // Uncomment this when mod effect is not wanted
+    osc.wave.amp(0.5); // Uncomment this when mod effect is not wanted
     // Modulate the carrier's amplitude with the modulator
     // Optionally, we can scale the signal.
     // osc.wave.amp(modulator.scale(-1, 1, 1, -1));
@@ -69,8 +69,8 @@ function setup () {
     osc.mod.amp(1)
     osc.mod.start()
     // Hook osc up w/ its mod
-    osc.wave.amp(0) // This lines enables the mod effect
-    osc.wave.amp(osc.mod.scale(-1, 1, 1, -1)) // This lines enables the mod effect
+    // osc.wave.amp(0) // This lines enables the mod effect
+    // osc.wave.amp(osc.mod.scale(-1, 1, 1, -1)) // This lines enables the mod effect
   })
 
   // Modulate the carrier's amplitude with the modulator
@@ -213,12 +213,12 @@ function gotResult (error, results) {
   classifyVideo()
 
   // Modify oscillator wave types if confidence is high enough
-  if (results[0].confidence < confidenceThreshold) {
-    print('I do not believe it.')
-    return
-  } else {
-    print('Okay, I believe you.')
-  }
+  // if (results[0].confidence < confidenceThreshold) {
+  //   print('I do not believe it.')
+  //   return
+  // } else {
+  //   print('Okay, I believe you.')
+  // }
   if (results[0].label == 'Class 1') { 
     oscillators[0].wave.setType('sine')
     oscillators[1].wave.setType('sine')
@@ -240,12 +240,12 @@ function toggle () {
   // Synth
   oscillators.forEach(osc => {
     if (!osc.playing) {
-      // print('should play')
+      print('should play')
       osc.wave.amp(0.5, 1)
       osc.mod.amp(1)
       osc.playing = true
     } else {
-      // print('should stop')
+      print('should stop')
       osc.wave.amp(0, 1)
       osc.mod.amp(0)
       osc.playing = false
