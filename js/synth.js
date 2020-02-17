@@ -46,9 +46,9 @@ function preload () {
 }
 
 function setup () {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(640, 480);
   video = createCapture(VIDEO);
-  video.size(windowWidth, windowHeight);
+  video.size(640, 480);
   video.hide();
 
   // Flip video
@@ -94,41 +94,11 @@ function setup () {
   classifyVideo()
 }
 
-function touchStarted() {
-  getAudioContext().resume()
-}
-
-function gotPoses (poses) {
-  //console.log(poses);
-  if (poses.length > 0) {
-    pose = poses[0].pose
-    skeleton = poses[0].skeleton
-  }
-  // Ease pos values
-  console.log(poses);
-  if (poses.length > 0) {
-    let wLX = poses[0].pose.keypoints[9].position.x;
-    let wLY = poses[0].pose.keypoints[9].position.y;
-    let wRX = poses[0].pose.keypoints[10].position.x;
-    let wRY = poses[0].pose.keypoints[10].position.y;
-    wristL_x = lerp(wristL_x, wLX, 0.5);
-    wristL_y = lerp(wristL_y, wLY, 0.5);
-    wristR_x = lerp(wristR_x, wRX, 0.5);
-    wristR_y = lerp(wristR_y, wRY, 0.5);
-    // eyelX = lerp(eyelX, eX, 0.5);
-    // eyelY = lerp(eyelY, eY, 0.5);
-  }
-}
-
-function modelLoaded () {
-  console.log('poseNet ready')
-}
-
 function draw () {
   // Clear background
   background(0);
   // image(video, 0, 0, 640, 480);
-  image(flippedVideo, 0, 0, windowWidth, windowHidth);
+  image(flippedVideo, 0, 0, 640, 480);
 
   // Draw the label
   fill(0, 255, 0)
@@ -198,6 +168,36 @@ function draw () {
 function classifyVideo () {
   flippedVideo = ml5.flipImage(video)
   classifier.classify(flippedVideo, gotResult)
+}
+
+function touchStarted() {
+  getAudioContext().resume()
+}
+
+function gotPoses (poses) {
+  //console.log(poses);
+  if (poses.length > 0) {
+    pose = poses[0].pose
+    skeleton = poses[0].skeleton
+  }
+  // Ease pos values
+  console.log(poses);
+  if (poses.length > 0) {
+    let wLX = poses[0].pose.keypoints[9].position.x;
+    let wLY = poses[0].pose.keypoints[9].position.y;
+    let wRX = poses[0].pose.keypoints[10].position.x;
+    let wRY = poses[0].pose.keypoints[10].position.y;
+    wristL_x = lerp(wristL_x, wLX, 0.5);
+    wristL_y = lerp(wristL_y, wLY, 0.5);
+    wristR_x = lerp(wristR_x, wRX, 0.5);
+    wristR_y = lerp(wristR_y, wRY, 0.5);
+    // eyelX = lerp(eyelX, eX, 0.5);
+    // eyelY = lerp(eyelY, eY, 0.5);
+  }
+}
+
+function modelLoaded () {
+  console.log('poseNet ready')
 }
 
 // When we get a result
