@@ -30,7 +30,8 @@ let confidenceThreshold = 0.80
 // Oscillator
 var oscillators = [
   { type: 'sine', playing: false, curPos: 0, curFreq: 0, mod: 0 },
-  { type: 'sawtooth', playing: false, curPos: 0, curFreq: 0, mod: 0 }
+  { type: 'sine', playing: false, curPos: 0, curFreq: 0, mod: 0 },
+  // { type: 'sawtooth', playing: false, curPos: 0, curFreq: 0, mod: 0 }
 ]
 var recentType = 'sine'
 var button
@@ -45,16 +46,17 @@ function preload () {
 }
 
 function setup () {
-  createCanvas(640, 480);
+  createCanvas(windowWidth, windowHeight);
   video = createCapture(VIDEO);
-  video.size(320, 240);
+  video.size(windowWidth, windowHeight);
   video.hide();
 
   // Flip video
   flippedVideo = ml5.flipImage(video)
 
   poseNet = ml5.poseNet(video, modelLoaded)
-  poseNet.flipHorizontal = true
+  // Flip image for PoseNet
+  poseNet.flipHorizontal = true 
   poseNet.on('pose', gotPoses)
 
   // Synth
@@ -126,7 +128,7 @@ function draw () {
   // Clear background
   background(0);
   // image(video, 0, 0, 640, 480);
-  image(flippedVideo, 0, 0, 640, 480);
+  image(flippedVideo, 0, 0, windowWidth, windowHidth);
 
   // Draw the label
   fill(0, 255, 0)
@@ -147,24 +149,6 @@ function draw () {
     fill(255, 0, 0);
     ellipse(wristL_x, wristL_y, distance);
     ellipse(wristR_x, wristR_y, distance);
-
-    // Draw wrist points
-    // fill(0, 0, 255);
-    // ellipse(pose.rightWrist.x, pose.rightWrist.y, 32);
-    // ellipse(pose.leftWrist.x, pose.leftWrist.y, 32);
-
-    // Draw ear points that controls oscillators
-    // fill(0, 0, 255)
-    // ellipse(pose.leftEar.x, pose.leftEar.y, 32)
-    // ellipse(pose.rightEar.x, pose.rightEar.y, 32)
-
-    // log value
-    // print('point val: ' + pose.nose.y);
-
-    // Remap value
-    // curFreq = map(pose.nose.y, 0, 480, range.min, range.max, true);
-    // oscillators[0].curFreq = map(pose.nose.y, 480, 0, range.min, range.max);
-    // print('curFreq val: ' + oscillators[0].curFreq);
 
     // Draw ellipses for each point
     for (let i = 0; i < pose.keypoints.length; i++) {
@@ -208,12 +192,6 @@ function draw () {
     osc.curFreq = map(osc.curPos, 480, 0, range.min, range.max)
     osc.wave.freq(osc.curFreq)
   })
-  // print('slider val: ' + slider.value());
-  // if (playing) {
-  //   background(255, 0, 255);
-  // } else {
-  //   background(51);
-  // }
 }
 
 // Get a prediction for the current video frame
