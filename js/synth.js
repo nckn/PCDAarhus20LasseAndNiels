@@ -12,8 +12,12 @@ let skeleton
 let distance
 let remappedDist
 
-let easeX = 0;
-let easeY = 0;
+let wristL_x = 0;
+let wristL_y = 0;
+let wristR_x = 0;
+let wristR_y = 0;
+let eyelX = 0;
+let eyelY = 0;
 
 // ml
 // Classifier Variable
@@ -45,14 +49,13 @@ function setup () {
   video = createCapture(VIDEO);
   video.size(320, 240);
   video.hide();
-  
+
+  // Flip video
   flippedVideo = ml5.flipImage(video)
 
   poseNet = ml5.poseNet(video, modelLoaded)
+  poseNet.flipHorizontal = true
   poseNet.on('pose', gotPoses)
-
-  // Flip video
-  // flippedVideo = ml5.flipImage(video)
 
   // Synth
   oscillators.forEach(osc => {
@@ -99,6 +102,20 @@ function gotPoses (poses) {
     pose = poses[0].pose
     skeleton = poses[0].skeleton
   }
+  // Ease pos values
+  console.log(poses);
+  if (poses.length > 0) {
+    let wLX = poses[0].pose.keypoints[9].position.x;
+    let wLY = poses[0].pose.keypoints[9].position.y;
+    let wRX = poses[0].pose.keypoints[10].position.x;
+    let wRY = poses[0].pose.keypoints[10].position.y;
+    wristL_x = lerp(wristL_x, wLX, 0.5);
+    wristL_y = lerp(wristL_y, wLY, 0.5);
+    wristR_x = lerp(wristR_x, wRX, 0.5);
+    wristR_y = lerp(wristR_y, wRY, 0.5);
+    // eyelX = lerp(eyelX, eX, 0.5);
+    // eyelY = lerp(eyelY, eY, 0.5);
+  }
 }
 
 function modelLoaded () {
@@ -108,8 +125,8 @@ function modelLoaded () {
 function draw () {
   // Clear background
   background(0);
+  // image(video, 0, 0, 640, 480);
   image(flippedVideo, 0, 0, 640, 480);
-  // image(flippedVideo, 0, 0, 640, 480);
 
   // Draw the label
   fill(0, 255, 0)
@@ -126,9 +143,10 @@ function draw () {
     // Remap value
     remappedDist = map(distance, 0, 200, 20, 0)
 
-    // Draw nose
-    // fill(255, 0, 0);
-    // ellipse(pose.nose.x, pose.nose.y, distance);
+    // Draw wrists
+    fill(255, 0, 0);
+    ellipse(wristL_x, wristL_y, distance);
+    ellipse(wristR_x, wristR_y, distance);
 
     // Draw wrist points
     // fill(0, 0, 255);
@@ -152,14 +170,11 @@ function draw () {
     for (let i = 0; i < pose.keypoints.length; i++) {
       let x = pose.keypoints[i].position.x;
       let y = pose.keypoints[i].position.y;
-      // easeX = lerp(easeX, x, 0.5);
-      // easeY = lerp(easeY, y, 0.5);
       fill(0, 255, 0);
-      ellipse(easeX, easeY, 16, 16);
       ellipse(x, y, 16, 16);
     }
 
-    // Draw lines btw each connected point in skeleton
+    // // Draw lines btw each connected point in skeleton
     for (let i = 0; i < skeleton.length; i++) {
       let a = skeleton[i][0];
       let b = skeleton[i][1];
@@ -168,9 +183,10 @@ function draw () {
       line(a.position.x, a.position.y, b.position.x, b.position.y);
     }
 
+    // This is where the frequency values are set for each oscillator
     // Set the different pos for each osc to be translated to a freq
-    oscillators[0].curPos = pose.leftEar.y
-    oscillators[1].curPos = pose.rightEar.y
+    oscillators[0].curPos = wristL_y // or pose.leftEar.y
+    oscillators[1].curPos = wristR_y// or pose.rightEar.y
   }
 
   // map mouseY to moodulator freq between 0 and 20hz
