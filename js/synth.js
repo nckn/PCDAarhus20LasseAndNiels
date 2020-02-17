@@ -1,10 +1,20 @@
-// ml5.js: Pose Estimation with PoseNet
-// The Coding Train / Daniel Shiffman
-// https://thecodingtrain.com/Courses/ml5-beginners-guide/7.1-posenet.html
-// https://youtu.be/OIo-DIOkNVg
-// https://editor.p5js.org/codingtrain/sketches/ULA97pJXR
 
-let video
+/*
+
+SYNTH GESTURES
+Stand up and let your hands play music!
+
+What:
+A simple synth sketch that maps hand (wrist) movement on the y axis to frequencies for each their oscillator.
+
+Why not:
+- If there's no sound coming through just hit space and see if its better.
+- Perhaps you need to click or touch the canvas once or twice so the audio Context understands it   
+  should get to work.
+
+*/
+
+let video;
 let flippedVideo;
 let poseNet;
 let pose;
@@ -125,6 +135,9 @@ function draw () {
     // Remap value
     remappedDist = map(distance, 0, 200, 20, 0)
 
+    // let chosenLY = wristL_y // or pose.leftEar.y
+    // let chosenRY = wristR_y// or pose.rightEar.y
+
     // Draw wrists
     fill(255, 0, 0);
     ellipse(wristL_x, wristL_y, distance);
@@ -208,10 +221,6 @@ function gotPoses (poses) {
   }
 }
 
-function modelLoaded () {
-  console.log('poseNet ready')
-}
-
 // When we get a result
 function gotResult (error, results) {
   // If there is an error
@@ -222,7 +231,6 @@ function gotResult (error, results) {
   // The results are in an array ordered by confidence.
   // console.log(results[0]);
   label = results[0].label
-
   
   // Classifiy again!
   classifyVideo()
@@ -251,6 +259,7 @@ function gotResult (error, results) {
   // print('results: ' + JSON.stringify(results[0]))
 }
 
+// Toggle play and pause based on call from space bar
 function toggle () {
   // Synth
   oscillators.forEach(osc => {
@@ -268,6 +277,7 @@ function toggle () {
   })
 }
 
+// Listen for key event on space bar
 function keyPressed () {
   // print(keyCode)
   if (keyCode === 32) {
@@ -280,8 +290,13 @@ function keyPressed () {
   // }
 }
 
+// Listen for resize
 function windowResized() {
   vWidth = windowWidth;
   vHeight = windowHeight;
   resizeCanvas(vWidth, vHeight);
+}
+
+function modelLoaded () {
+  console.log('poseNet ready')
 }
