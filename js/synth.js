@@ -6,11 +6,11 @@
 
 let video
 let flippedVideo;
-let poseNet
-let pose
-let skeleton
-let distance
-let remappedDist
+let poseNet;
+let pose;
+let skeleton;
+let distance;
+let remappedDist;
 
 let wristL_x = 0;
 let wristL_y = 0;
@@ -19,9 +19,13 @@ let wristR_y = 0;
 let eyelX = 0;
 let eyelY = 0;
 
+// Video width
+let vVidth = 0; // or 640
+let vHeight = 0; // or 480
+
 // ml
 // Classifier Variable
-let classifier
+let classifier;
 // Model URL
 let imageModelURL = 'https://teachablemachine.withgoogle.com/models/gdHHJrrU/'
 let label = ''
@@ -46,9 +50,11 @@ function preload () {
 }
 
 function setup () {
-  createCanvas(640, 480);
+  vVidth = windowWidth;
+  vHeight = windowHeight;
+  createCanvas(vVidth, vHeight);
   video = createCapture(VIDEO);
-  video.size(640, 480);
+  video.size(vVidth, vHeight);
   video.hide();
 
   // Flip video
@@ -98,7 +104,7 @@ function draw () {
   // Clear background
   background(0);
   // image(video, 0, 0, 640, 480);
-  image(flippedVideo, 0, 0, 640, 480);
+  image(flippedVideo, 0, 0, vVidth, vHeight);
 
   // Draw the label
   fill(0, 255, 0)
