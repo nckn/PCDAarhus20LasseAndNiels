@@ -20,7 +20,7 @@ let eyelX = 0;
 let eyelY = 0;
 
 // Video width
-let vVidth = 0; // or 640
+let vWidth = 0; // or 640
 let vHeight = 0; // or 480
 
 // ml
@@ -33,8 +33,8 @@ let confidenceThreshold = 0.80
 
 // Oscillator
 var oscillators = [
-  { type: 'sine', playing: false, curPos: 0, curFreq: 0, mod: 0 },
-  { type: 'sine', playing: false, curPos: 0, curFreq: 0, mod: 0 },
+  { type: 'sine', playing: true, curPos: 0, curFreq: 0, mod: 0 },
+  { type: 'sine', playing: true, curPos: 0, curFreq: 0, mod: 0 },
   // { type: 'sawtooth', playing: false, curPos: 0, curFreq: 0, mod: 0 }
 ]
 var recentType = 'sine'
@@ -42,7 +42,7 @@ var button
 var slider
 // var playing = false;
 // let curFreq = [];
-let range = { min: 40, max: 180 }
+let range = { min: 40, max: 400 }
 
 // Load the model first
 function preload () {
@@ -50,11 +50,15 @@ function preload () {
 }
 
 function setup () {
-  vVidth = windowWidth;
+  // Stretch video
+  // vWidth = windowWidth;
+  // vHeight = windowHeight;
+  // Respect aspect ratio
   vHeight = windowHeight;
-  createCanvas(vVidth, vHeight);
+  vWidth = vHeight * 1.333;
+  createCanvas(vWidth, vHeight);
   video = createCapture(VIDEO);
-  video.size(vVidth, vHeight);
+  video.size(vWidth, vHeight);
   video.hide();
 
   // Flip video
@@ -91,7 +95,7 @@ function setup () {
   // oscillators[0].wave.amp(modulator.scale(-1, 1, 1, -1));
 
   // Create slider
-  slider = createSlider(100, 1200, 440)
+  // slider = createSlider(100, 1200, 440)
 
   button = createButton('play/pause')
   button.mousePressed(toggle)
@@ -104,7 +108,7 @@ function draw () {
   // Clear background
   background(0);
   // image(video, 0, 0, 640, 480);
-  image(flippedVideo, 0, 0, vVidth, vHeight);
+  image(flippedVideo, 0, 0, vWidth, vHeight);
 
   // Draw the label
   fill(0, 255, 0)
@@ -124,6 +128,7 @@ function draw () {
     // Draw wrists
     fill(255, 0, 0);
     ellipse(wristL_x, wristL_y, distance);
+    fill(0, 255, 0);
     ellipse(wristR_x, wristR_y, distance);
 
     // Draw ellipses for each point
@@ -165,7 +170,8 @@ function draw () {
     let modAmp = map(mouseX, 0, width, 0, 1)
     osc.mod.amp(modAmp, 0.01) // fade time of 0.1 for smooth fading
     // Update oscillators
-    osc.curFreq = map(osc.curPos, 480, 0, range.min, range.max)
+    // osc.curFreq = map(osc.curPos, 480, 0, range.min, range.max) org
+    osc.curFreq = map(osc.curPos, vHeight, 0, range.min, range.max)
     osc.wave.freq(osc.curFreq)
   })
 }
@@ -272,4 +278,10 @@ function keyPressed () {
   // } else {
   //   value = 0;
   // }
+}
+
+function windowResized() {
+  vWidth = windowWidth;
+  vHeight = windowHeight;
+  resizeCanvas(vWidth, vHeight);
 }
