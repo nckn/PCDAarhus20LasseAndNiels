@@ -38,12 +38,11 @@ function preload () {
 }
 
 function setup () {
-  createCanvas(640, 480)
-  // poseNet
-  // Create the video
+  createCanvas(640, 480);
   video = createCapture(VIDEO);
   video.size(320, 240);
   video.hide();
+  
   flippedVideo = ml5.flipImage(video)
 
   poseNet = ml5.poseNet(video, modelLoaded)
@@ -83,7 +82,12 @@ function setup () {
   button = createButton('play/pause')
   button.mousePressed(toggle)
 
+  // Start classifying
   classifyVideo()
+}
+
+function touchStarted() {
+  getAudioContext().resume()
 }
 
 function gotPoses (poses) {
@@ -101,8 +105,7 @@ function modelLoaded () {
 function draw () {
   // Clear background
   background(0);
-  // Draw video
-  image(flippedVideo, 0, 0)
+  image(flippedVideo, 0, 0, 640, 480);
   // image(flippedVideo, 0, 0, 640, 480);
 
   // Draw the label
