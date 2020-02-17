@@ -12,6 +12,9 @@ let skeleton
 let distance
 let remappedDist
 
+let easeX = 0;
+let easeY = 0;
+
 // ml
 // Classifier Variable
 let classifier
@@ -132,10 +135,10 @@ function draw () {
     // ellipse(pose.rightWrist.x, pose.rightWrist.y, 32);
     // ellipse(pose.leftWrist.x, pose.leftWrist.y, 32);
 
-    // Draw ear points
-    fill(0, 0, 255)
-    ellipse(pose.leftEar.x, pose.leftEar.y, 32)
-    ellipse(pose.rightEar.x, pose.rightEar.y, 32)
+    // Draw ear points that controls oscillators
+    // fill(0, 0, 255)
+    // ellipse(pose.leftEar.x, pose.leftEar.y, 32)
+    // ellipse(pose.rightEar.x, pose.rightEar.y, 32)
 
     // log value
     // print('point val: ' + pose.nose.y);
@@ -146,21 +149,24 @@ function draw () {
     // print('curFreq val: ' + oscillators[0].curFreq);
 
     // Draw ellipses for each point
-    // for (let i = 0; i < pose.keypoints.length; i++) {
-    //   let x = pose.keypoints[i].position.x;
-    //   let y = pose.keypoints[i].position.y;
-    //   fill(0, 255, 0);
-    //   ellipse(x, y, 16, 16);
-    // }
+    for (let i = 0; i < pose.keypoints.length; i++) {
+      let x = pose.keypoints[i].position.x;
+      let y = pose.keypoints[i].position.y;
+      // easeX = lerp(easeX, x, 0.5);
+      // easeY = lerp(easeY, y, 0.5);
+      fill(0, 255, 0);
+      ellipse(easeX, easeY, 16, 16);
+      ellipse(x, y, 16, 16);
+    }
 
     // Draw lines btw each connected point in skeleton
-    // for (let i = 0; i < skeleton.length; i++) {
-    //   let a = skeleton[i][0];
-    //   let b = skeleton[i][1];
-    //   strokeWeight(2);
-    //   stroke(255);
-    //   line(a.position.x, a.position.y, b.position.x, b.position.y);
-    // }
+    for (let i = 0; i < skeleton.length; i++) {
+      let a = skeleton[i][0];
+      let b = skeleton[i][1];
+      strokeWeight(2);
+      stroke(255);
+      line(a.position.x, a.position.y, b.position.x, b.position.y);
+    }
 
     // Set the different pos for each osc to be translated to a freq
     oscillators[0].curPos = pose.leftEar.y
@@ -222,18 +228,18 @@ function gotResult (error, results) {
   // } else {
   //   print('Okay, I believe you.')
   // }
-  if (results[0].label == 'Class 1') { 
-    oscillators[0].wave.setType('sine')
-    oscillators[1].wave.setType('sine')
-    recentType = 'sine'
-  } else if (results[0].label == 'Class 2') {
-    oscillators[0].wave.setType('sawtooth')
-    oscillators[1].wave.setType('sawtooth')
-    recentType = 'sawtooth'
-  } else if (results[0].label == 'Class 3') {
-    oscillators[0].wave.setType(recentType)
-    oscillators[1].wave.setType(recentType)
-  }
+  // if (results[0].label == 'Class 1') { 
+  //   oscillators[0].wave.setType('sine')
+  //   oscillators[1].wave.setType('sine')
+  //   recentType = 'sine'
+  // } else if (results[0].label == 'Class 2') {
+  //   oscillators[0].wave.setType('sawtooth')
+  //   oscillators[1].wave.setType('sawtooth')
+  //   recentType = 'sawtooth'
+  // } else if (results[0].label == 'Class 3') {
+  //   oscillators[0].wave.setType(recentType)
+  //   oscillators[1].wave.setType(recentType)
+  // }
 
   // log confidence
   // print('results: ' + JSON.stringify(results[0]))
