@@ -1,5 +1,14 @@
 # p5 Sketches
 
+## Teachable Machine
+
+Template for image classifcation: link
+
+Template for sound classification: link
+
+Template for pose detection: link
+
+
 ## Frequency modulation
 
 https://p5js.org/examples/sound-amplitude-modulation.html
