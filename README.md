@@ -2,11 +2,13 @@
 
 ## Teachable Machine
 
-Template for image classifcation: link
+[Template for pose detection](https://editor.p5js.org/lasse/sketches/KBejwCO_)
+
+[Template for image classifcation](https://editor.p5js.org/lasse/sketches/8m4frlFhA)
 
 Template for sound classification: link
 
-Template for pose detection: link
+
 
 
 ## Frequency modulation
