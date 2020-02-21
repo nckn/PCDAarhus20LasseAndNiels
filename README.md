@@ -70,11 +70,14 @@ Dan Shiffman
 ### Niels
 
 http://www.konradstudio.com
+
 [mail@konradstudio.com](mailto:mail@konradstudio.com)
 
 
 ### Lasse
 
 http://lassekorsgaard.com
+
 [@lassekorsgaard](https://www.instagram.com/lassekorsgaard/)
+
 [hi@lassekorsgaard.com](mailto:hi@lassekorsgaard.com)
