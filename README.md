@@ -55,6 +55,15 @@ function windowResized() {
 resizeCanvas(windowWidth, windowHeight);
 }
 ```
+
+### Delay something
+```
+setTimeout(() => {
+  doSomethingHere();
+}, 1000);
+```
+
+
 ## Tutorials
 
 PoseNet Eased Nose Tracking
