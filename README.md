@@ -21,22 +21,8 @@ https://github.com/tensorflow/tfjs-models/tree/master/posenet
 
 https://veremin.mybluemix.net/
 
-## Lasses Sketch
 
-https://editor.p5js.org/lasse/sketches/8m4frlFhA
 
-## Contact info
-
-### Niels
-
-http://www.konradstudio.com
-mail@konradstudio.com
-
-## Contact info
-
-### Lasse
-
-http://lassekorsgaard.com
 
 ## Snippets
 
@@ -72,9 +58,23 @@ setTimeout(() => {
 }, 1000);
 ```
 
-
-## Tutorials
+## Tutorials and Inspration
 
 PoseNet Eased Nose Tracking
 https://editor.p5js.org/codingtrain/sketches/Skd42hIy4
 Dan Shiffman
+
+
+## Contact info
+
+### Niels
+
+http://www.konradstudio.com
+[mail@konradstudio.com](mailto:mail@konradstudio.com)
+
+
+### Lasse
+
+http://lassekorsgaard.com
+[@lassekorsgaard](https://www.instagram.com/lassekorsgaard/)
+[hi@lassekorsgaard.com](mailto:hi@lassekorsgaard.com)
