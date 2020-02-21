@@ -32,12 +32,11 @@ http://lassekorsgaard.com
 ## Snippets
 
 ### Ease / Lerp
-
 let endValue = 0;
 
 void draw() {
-newValue = mouseX
-endValue = lerp(endValue, newValue, 0.5);
+  newValue = mouseX
+  endValue = lerp(endValue, newValue, 0.5);
 }
 
 ### map and scaling range
@@ -49,8 +48,15 @@ remappedDist = map(distance, 0, 200, 20, 0)
 ### Resize eventlistener
 
 function windowResized() {
-resizeCanvas(windowWidth, windowHeight);
+  resizeCanvas(windowWidth, windowHeight);
 }
+
+### Delay
+setTimeout(() => {
+  doSomethingHere();
+}, 1000);
+
+
 
 ## Tutorials
 
