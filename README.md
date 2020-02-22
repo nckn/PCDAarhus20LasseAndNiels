@@ -11,21 +11,6 @@
 
 
 
-## Frequency modulation
-
-https://p5js.org/examples/sound-amplitude-modulation.html
-
-## poseNet doc
-
-https://github.com/tensorflow/tfjs-models/tree/master/posenet
-
-## Examples
-
-https://veremin.mybluemix.net/
-
-
-
-
 ## Snippets
 
 ### Ease / Lerp
@@ -66,11 +51,7 @@ let value1 = random(150); // 0 and 150
 let value2 = random(30, 70); // Between 30 and 70
 ```
 
-## Tutorials and Inspration
 
-PoseNet Eased Nose Tracking
-https://editor.p5js.org/codingtrain/sketches/Skd42hIy4
-Dan Shiffman
 
 
 ## Contact info
@@ -91,3 +72,25 @@ http://lassekorsgaard.com
 [@lassekorsgaard](https://www.instagram.com/lassekorsgaard/)
 
 [hi@lassekorsgaard.com](mailto:hi@lassekorsgaard.com)
+
+
+
+
+
+## Tutorials, documentation and inspration
+
+PoseNet Eased Nose Tracking
+https://editor.p5js.org/codingtrain/sketches/Skd42hIy4
+Dan Shiffman
+
+## Frequency modulation
+
+https://p5js.org/examples/sound-amplitude-modulation.html
+
+## poseNet doc
+
+https://github.com/tensorflow/tfjs-models/tree/master/posenet
+
+## Examples
+
+https://veremin.mybluemix.net/
