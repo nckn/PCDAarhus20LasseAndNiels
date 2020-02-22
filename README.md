@@ -83,14 +83,14 @@ PoseNet Eased Nose Tracking
 https://editor.p5js.org/codingtrain/sketches/Skd42hIy4
 Dan Shiffman
 
-## Frequency modulation
+### Frequency modulation
 
 https://p5js.org/examples/sound-amplitude-modulation.html
 
-## poseNet doc
+### poseNet doc
 
 https://github.com/tensorflow/tfjs-models/tree/master/posenet
 
-## Examples
+### Examples
 
 https://veremin.mybluemix.net/
