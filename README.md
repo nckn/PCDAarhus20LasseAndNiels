@@ -79,6 +79,8 @@ Dan Shiffman
 
 http://www.konradstudio.com
 
+[@konradstudio](https://www.instagram.com/konradstudio/)
+
 [mail@konradstudio.com](mailto:mail@konradstudio.com)
 
 
