@@ -60,6 +60,12 @@ setTimeout(() => {
 }, 1000);
 ```
 
+### Make a random value
+```
+let = random(150); // 0 and 150
+let = random(30, 70); // Between 30 and 70
+```
+
 ## Tutorials and Inspration
 
 PoseNet Eased Nose Tracking
