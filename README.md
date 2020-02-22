@@ -6,7 +6,7 @@
 
 [Template for image classifcation](https://editor.p5js.org/lasse/sketches/8m4frlFhA)
 
-Template for sound classification: link
+[Template for sound classifcation](https://editor.p5js.org/nielskonrad/sketches/MvvUu0YV)
 
 
 
