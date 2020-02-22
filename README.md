@@ -62,8 +62,8 @@ setTimeout(() => {
 
 ### Make a random value
 ```
-let = random(150); // 0 and 150
-let = random(30, 70); // Between 30 and 70
+let value1 = random(150); // 0 and 150
+let value2 = random(30, 70); // Between 30 and 70
 ```
 
 ## Tutorials and Inspration
